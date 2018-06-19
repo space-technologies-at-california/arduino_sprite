@@ -92,8 +92,6 @@ typedef uint8_t byte;
 typedef uint8_t boolean;
 typedef uint16_t word;
 
-#define NAN 0
-
 #define min(a,b) ((a)<(b)?(a):(b))
 #define max(a,b) ((a)>(b)?(a):(b))
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
