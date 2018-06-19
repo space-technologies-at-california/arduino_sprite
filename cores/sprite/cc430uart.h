@@ -115,7 +115,7 @@ class CC430UART
      *
      * @return Amount of bytes transmitted
      */
-    size_t write(uint8_t *buf, unsigned int len);
+    size_t write(uint8_t *buf, uint16_t len);
 
     /**
      * read
