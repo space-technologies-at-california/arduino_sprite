@@ -7,6 +7,8 @@
 
 */
 
+#include "compat.h"
+
 #include "cc430f5137.h"
 #include "cc430core.h"
 #include "cc430radio.h"

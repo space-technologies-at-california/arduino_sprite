@@ -31,6 +31,8 @@
   Adapted by Daniel Berenguer for panStamp: 06/28/2014
 */
 
+#include "compat.h"
+
 #include "wiring.h"
 #include "sprite.h"
 
