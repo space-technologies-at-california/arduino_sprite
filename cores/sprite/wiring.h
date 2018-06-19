@@ -156,7 +156,9 @@ extern const uint16_t digital_pin_to_analog_in[];
 inline void delayMicroseconds(const uint16_t us)
 {
   const uint16_t cyclesPerMicro = SYSTEM_CLK_FREQ/1000000L;
-  __delay_cycles((us * cyclesPerMicro));
+  for (uint16_t i = 0; i < us; i++) {
+      __delay_cycles((cyclesPerMicro));
+  }
 }
 
 // wiring.cpp
