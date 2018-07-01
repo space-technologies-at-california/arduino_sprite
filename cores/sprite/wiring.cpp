@@ -77,7 +77,9 @@ void init(void)
   // Init Sprite object
   Sprite.init();
 
+#ifdef ENABLE_WDT_ABUSE
   enableWatchDogIntervalMode();
+#endif
   __eint();
 }
 
@@ -206,6 +208,7 @@ void sleep(uint32_t milliseconds)
 	enableWatchDogIntervalMode();
 }
 
+#ifdef ENABLE_WDT_ABUSE
 /* (ab)use the WDT */
 void delay(uint32_t milliseconds)
 {
@@ -241,3 +244,8 @@ void watchdog_isr (void)
   /* Exit from LMP3 on reti (this includes LMP0) */
   __bic_status_register_on_exit(LPM3_bits);
 }
+#else
+void delay(uint32_t milliseconds) {
+  delayMicroseconds(milliseconds * 1000);
+}
+#endif
