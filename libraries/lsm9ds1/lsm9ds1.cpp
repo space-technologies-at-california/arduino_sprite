@@ -23,18 +23,12 @@ void lsm9ds1::initI2C( TwoWire* wireBus, int32_t sensorID ) {
     _wire = wireBus;
     _lsm9dso_sensorid_mag = sensorID + 2;
     _lsm9dso_sensorid_gyro = sensorID + 3;
-    _magSensor   = Sensor(this, &lsm9ds1::readMag,   &lsm9ds1::getMagEvent,   &lsm9ds1::getMagSensor);
-    _gyroSensor  = Sensor(this, &lsm9ds1::readGyro,  &lsm9ds1::getGyroEvent,  &lsm9ds1::getGyroSensor);
 }
 
 
 // default
 lsm9ds1::lsm9ds1( int32_t sensorID ) {
     initI2C(&Wire, sensorID);
-}
-
-lsm9ds1::lsm9ds1( TwoWire* wireBus, int32_t sensorID ) {
-    initI2C(wireBus, sensorID);
 }
 
 
@@ -52,17 +46,6 @@ bool lsm9ds1::begin()
 
   delay(10);
 
-
-  /*
-  for (uint8_t i=0; i<0x30; i++) {
-    Serial.print("XG $"); Serial.print(i, HEX); Serial.print(" = 0x"); 
-    Serial.println(read8(XGTYPE, i), HEX);
-  }
-  for (uint8_t i=0; i<0x30; i++) {
-    Serial.print("M $"); Serial.print(i, HEX); Serial.print(" = 0x"); 
-    Serial.println(read8(MAGTYPE, i), HEX);
-  }
-  */
 
   uint8_t id = read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
   //Serial.print ("XG whoami: 0x"); Serial.println(id, HEX);
@@ -220,19 +203,6 @@ bool lsm9ds1::getEvent(//sensors_event_t *accelEvent,
   // if (tempEvent)  getTempEvent(tempEvent, timestamp);
   
   return true;
-}
-
-/**************************************************************************/
-/*!
-    @brief  Gets the sensor_t data
-*/
-/**************************************************************************/
-void lsm9ds1::getSensor( sensor_t *mag,
-                                 sensor_t *gyro)
-{
-  /* Update appropriate sensor metadata. */
-  if (mag)   getMagSensor(mag);
-  if (gyro)  getGyroSensor(gyro);
 }
 
 /***************************************************************************
